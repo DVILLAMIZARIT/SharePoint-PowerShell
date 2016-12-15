@@ -23,7 +23,7 @@ $List = $Context.Web.Lists.GetByTitle($DocLibName)
 $Context.Load($List)
 $Context.ExecuteQuery();
 
-#Upload all files in Specific Folder
+#Upload all files in Specific Working Folder - Definded in Export Script
 Foreach ($File in (dir $Folder -File))
 {
  if ($File -ne "*.json")
@@ -40,9 +40,10 @@ Foreach ($File in (dir $Folder -File))
  }
 }
 
-#Pause and Wait for Upload to Finish
+#Pause and Wait for Upload to Finish for slower networks
 Start-Sleep -Milliseconds 10000
 
+#UPS Bulk User Profile Updating API
 # Get instances to the Office 365 tenant using CSOM
 $uri = New-Object System.Uri -ArgumentList $adminUrl
 $context = New-Object Microsoft.SharePoint.Client.ClientContext($uri)
@@ -53,7 +54,7 @@ $context.Load($o365)
 # Type of user identifier ["Email", "CloudId", "PrincipalName"] in the User Profile Service
 $userIdType=[Microsoft.Online.SharePoint.TenantManagement.ImportProfilePropertiesUserIdType]::Email
 
-# JSON Column name that maps to the user we want to update. 
+# JSON Column name that maps to the user we want to update, expecting email as seen in line above. 
 $userLookupKey="AccountName"
 
 $propertyMap = New-Object -type 'System.Collections.Generic.Dictionary[String,String]'
