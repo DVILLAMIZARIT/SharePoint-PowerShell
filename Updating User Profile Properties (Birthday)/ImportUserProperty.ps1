@@ -4,7 +4,7 @@ Add-Type -Path "C:\Program Files\Common Files\Microsoft Shared\Web Server Extens
 #Script Varibles #1
 $userName = "email"
 $Password = "password"
-#Script Varibles #2 - Site Detaials for Document Library Name we want to Upload To
+#Script Varibles #2 - Site Detaials for Document Library Name we want to upload To
 $SiteURL = "https://site.sharepoint.com/"
 $DocLibName = "Document Librbary Name Here"
 #Script Varibles #3 - Site Detaials for SharePoint Admin Centre
