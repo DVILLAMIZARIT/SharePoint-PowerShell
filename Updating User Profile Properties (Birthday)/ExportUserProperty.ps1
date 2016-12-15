@@ -20,7 +20,7 @@ $outputFile = $WorkfingFolder + "UserProfileOnPremExportCSVTemp.csv"
 $outputFileFinal = $WorkfingFolder + "UserProfileOnPremExportCSVFinal.csv"
 $JsonOutputFile = $WorkfingFolder + "UserProfileOnPremExport.json"
 
-#Clean Our Work Folder
+#Clean Our Work Folder First to empty all files before
 Remove-Item -Recurse -Force $WorkfingFolder -exclude *.ps1
 
 #Begin User Profile Data Collection, Add More $GetField Vars For Additional Columns Required
@@ -43,6 +43,7 @@ foreach ($profile in $profiles) {
      } else {
        $user.$field = $profile[$field].Value
        #Remove Only This If Statment To Include All Results (Blank Or Not) if Desired.
+       #This section will only add fields if they have values in them. 
        if ($user.$field){$HasData=1}else {$HasData=0}
      }
    }
@@ -53,12 +54,13 @@ foreach ($profile in $profiles) {
   }
 write-host "Profiles Collected: " $i -foregroundcolor "Yellow"
 $collection | Export-Csv $outputFile -NoTypeInformation
-#Delay to Ensure Saved Successfully 
+#Delay to Ensure Saved Successfully to disk before reopening. 
 Start-Sleep -Milliseconds 1000
 write-host "Temp File Saved" -foregroundcolor "Yellow"
 
 #Convert Saved Values to Correct Date Format (MM/DD/YYYY)
 $CSVColumnName = $GetField2
+#Get current year to count from when we trim the string
 $CurrentYear = get-date –f yyyy
 write-host "Starting Date Conversion Process" -foregroundcolor "Yellow"
 Import-Csv $outputFile | % { 
@@ -74,9 +76,7 @@ $StringColumnName = $_.$CSVColumnName
         }
         else
         { $_.$CSVColumnName = $StringColumnName }
-    }
-    else { #$_.$CSVColumnName =  $_.$CSVColumnName 
-    }
+    } else {}
 $_} | Export-Csv $outputFileFinal -NoTypeInformation
 write-host "Date Conversion Process Complete" -foregroundcolor "Yellow"
 
