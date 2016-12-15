@@ -1,2 +1,2 @@
-# SharePoint-PowerShell
-Collection Of PowerShell Scrips for SharePoint 2013 and Beyond
+# Updating User Profile Properties (Birthday)
+Import and Export Scripts to extract user profile properties from SharePoint On-Prem to SharePoint Online
