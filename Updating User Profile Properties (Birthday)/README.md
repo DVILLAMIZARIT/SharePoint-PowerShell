@@ -11,7 +11,7 @@ Import and Export Scripts to extract user profile properties from SharePoint On-
   * Process: Data is collected from the Users Profile; our two fields are defined as the GetField variables (able to add more as you please). We use the WorkEmail field as the identifier when mapping in Script 2 as it contained our user’s emails. The data is then checked to ensure data is returned else it is not added to our CSV file. The CSV file is then loaded with only value returned fields and saved. This is the point where our date is then converted to a value format before our json is created, so the CSV file is loaded, manipulated and then saved as a final CSV file. The last phase of the script is to load the final CSV and convert it to. json format with the built in function, working folder is cleared on any csv files and we are left with only our .json final file. Please see comments in file for some more explanation at stages. 
 
 * Script 2: ImportUserProperty
-  * Define Username and Password for SharePoint Online Authentication
+  * Define Username and Password for SharePoint Online Authentication.
   * Define SiteURL, DocLib Name, SharePoint AdminURL and our Working Folder in Script 1
   * Define PropertyMap(Line-59) aligning to our returned field in Script 1 (SPS-Birthday)
   * Process: After Authenticating with SharePoint Online, we scan our working folder to upload our .json file into the defined SharePoint Online Site Library, after the file is uploaded (small break to account for slower networks) we begin the Bulk API update method, the property map section maps the column in our json file to the field that needs to be updated in UPS...simple. 
