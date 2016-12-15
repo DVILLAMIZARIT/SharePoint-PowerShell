@@ -20,4 +20,8 @@ Import and Export Scripts to extract user profile properties from SharePoint On-
   * Once all defined properties are filled out according to your environment run Script 1 on your SharePoint On-Prem server, script will create and output a single .json file into our defined working folder. Simply then run Script 2 in SharePoint Online Management console which will upload our .json to the defined Online site and update the user profile properties.
 
 * To-Do
-  1.  
+  * Automatically Execute Script 2 from Script 1
+  * Let user add more GetField properties without modifying the later code
+  * Reduce to one CSV output
+  * Upload specific output file in Script 2 not all files in working folder
+  * Possibility to automatically map Properties by reading .json first
